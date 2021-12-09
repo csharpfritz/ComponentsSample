@@ -1,0 +1,16 @@
+@inject IJSRuntime JS
+
+<button @onclick="Click">@Text</button>
+
+@code {
+
+    [Parameter] public string Text { get; set; }
+
+    async Task Click() {
+
+        var module = await JS.InvokeAsync<IJSObjectReference>("import", "./js/alert.js");
+        await module.InvokeVoidAsync("jsAlert", "This is your warning");
+
+    }
+
+}
